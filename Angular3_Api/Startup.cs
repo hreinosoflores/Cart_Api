@@ -29,17 +29,13 @@ namespace Angular3_Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            //CORS
             services.AddCors(options =>
-            {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  builder =>
-                                  {
-                                      builder.WithOrigins("http://localhost:4200");
-                                      builder.WithHeaders("Content-Type");
-                                      builder.WithMethods("PATCH");
-                                  });
-            });
+                options.AddPolicy(
+                    name: MyAllowSpecificOrigins,
+                    builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod()
+                )
+            );
             services.AddControllers();
             services.AddDbContext<ApiContext>(options =>
             {
@@ -55,9 +51,11 @@ namespace Angular3_Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(MyAllowSpecificOrigins);
+
 
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
