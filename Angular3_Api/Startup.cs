@@ -33,7 +33,7 @@ namespace Angular3_Api
             services.AddCors(options =>
                 options.AddPolicy(
                     name: MyAllowSpecificOrigins,
-                    builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod()
+                    builder => builder.WithOrigins("http://localhost:4200","http://localhost:8080").AllowAnyHeader().AllowAnyMethod()
                 )
             );
             services.AddControllers();
